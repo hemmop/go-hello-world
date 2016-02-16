@@ -7,6 +7,7 @@ import (
 
 func handler(w http.ResponseWriter, r *http.Request) {
     fmt.Println("request: method=", r.Method, " URL=", r.URL, " Proto=", r.Proto, " Remote=", r.RemoteAddr)
+    w.Header().Set("X-Foo", "from application")
     fmt.Fprintf(w, "Hello World! %s", r.URL.Path[1:])
 }
 
