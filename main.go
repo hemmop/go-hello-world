@@ -3,12 +3,14 @@ package main
 import (
     "fmt"
     "net/http"
+    "time"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
-    fmt.Println("request: method=", r.Method, " URL=", r.URL, " Proto=", r.Proto, " Remote=", r.RemoteAddr)
-    w.Header().Set("X-Foo", "from application")
-    fmt.Fprintf(w, "Hello World! %s", r.URL.Path[1:])
+    now := time.Now().Format(time.RFC3339)
+    fmt.Println("Got request at", now)
+    w.Header().Set("X-TimeStamp", now)
+    fmt.Fprintln(w, "Hello World @", now)
 }
 
 func main() {
